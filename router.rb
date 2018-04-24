@@ -1,6 +1,7 @@
 class Router
-  def initialize(meals_controller)
+  def initialize(meals_controller, customers_controller)
     @meals_controller = meals_controller
+    @customers_controller = customers_controller
     @running = true
   end
 
@@ -15,24 +16,26 @@ class Router
   private
 
   def display_menu
-    puts "------------------------------"
-    puts "------------ MENU ------------"
-    puts "------------------------------"
-    puts "What do you want to do"
-    puts "1 - List all meals"
-    puts "2 - Add new meal"
-    puts "9 - Quit"
-    print "> "
+    puts "-------------------"
+    puts "------- MENU ------"
+    puts "-------------------"
+    puts "1. List all meals"
+    puts "2. Add new meal"
+    puts "3. List all customers"
+    puts "4. Add new customer"
+    puts "9. Exit"
     gets.chomp.to_i
   end
 
   def action(choice)
     case choice
     when 1 then @meals_controller.list
-    when 2 then @meals_controller.add
+    when 2 then @meals_controller.add_meal
+    when 3 then @customers_controller.list
+    when 4 then @customers_controller.add_customer
     when 9 then @running = false
     else
-      puts "wrong choice"
+      "Wrong action"
     end
   end
 end
